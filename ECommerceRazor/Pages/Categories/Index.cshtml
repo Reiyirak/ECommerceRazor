@@ -7,7 +7,7 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-item-center mb-3">
         <h2>Lista de Categorias</h2>
-        <a asp-page="Crear" class="btn btn-primary">
+        <a asp-page="Create" class="btn btn-primary">
             <i class="fa-solid fa-plus"></i> Nueva Categoria
         </a>
     </div>
@@ -33,13 +33,13 @@
                         <td>@categoria.DisplayOrder</td>
                         <td>@categoria.CreationDate.ToString("dd/MM/yyyy")</td>
                         <td>
-                            <a asp-page="Editar" asp-route-id="@categoria.Id" class="btn btn-sm btn-warning">
+                            <a asp-page="Edit" asp-route-id="@categoria.Id" class="btn btn-sm btn-warning">
                                 <i class="fa-solid fa-pencil"></i> Editar
                             </a>
-                            <a asp-page="Detalle" asp-route-id="@categoria.Id" class="btn btn-sm btn-info">
+                            <a asp-page="Detail" asp-route-id="@categoria.Id" class="btn btn-sm btn-info">
                                 <i class="fa-solid fa-circle-info"></i> Detalle
                             </a>
-                            <a asp-page="Borrar" asp-route-id="@categoria.Id" class="btn btn-sm btn-danger">
+                            <a asp-page="Delete" asp-route-id="@categoria.Id" class="btn btn-sm btn-danger">
                                 <i class="fa-solid fa-trash-can"></i> Eliminar
                             </a>
                         </td>
