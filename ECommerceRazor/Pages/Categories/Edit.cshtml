@@ -1,0 +1,61 @@
+﻿@page "{id:int}"
+@model ECommerceRazor.Pages.Categories.EditModel
+@{
+    ViewData["Title"] = "Editar Categoria";
+}
+
+<h2 class="text-center">Editar Categoria</h2>
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h4><i class="fa-solid fa-circle-plus"></i> Editar Categoria</h4>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                @* Hidden field for ID *@
+                <input type="hidden" asp-for="Category.Id">
+
+                @* Validation Summary *@
+                <div asp-validation-summary="All" class="alert alert-danger" id="validation-summary"></div>
+
+                @* Field: Category Name *@
+                <div class="mb-3">
+                    <label asp-for="Category.Name" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-tag"></i></span>
+                        <input asp-for="Category.Name" class="form-control"
+                            placeholder="Ingresa el nombre de la categoria">
+                    </div>
+                    <span asp-validation-for="Category.Name" class="text-danger"></span>
+                </div>
+
+                @* Field: Category Display Order *@
+                <div class="mb-3">
+                    <label asp-for="Category.DisplayOrder" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-arrow-up-9-1"></i></span>
+                        <input asp-for="Category.DisplayOrder" class="form-control"
+                            placeholder="Ingresa el orden de visualizacion">
+                    </div>
+                    <span asp-validation-for="Category.DisplayOrder" class="text-danger"></span>
+                </div>
+
+                @* Buttons *@
+                <div class="d-flex justify-content-between">
+                    <a asp-page="Index" class="btn btn-secondary">
+                        <i class="fa-solid fa-arrow-left"></i> Regresar
+                    </a>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa-solid fa-floppy-disk"></i> Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
