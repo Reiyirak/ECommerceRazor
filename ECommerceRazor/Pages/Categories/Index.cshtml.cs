@@ -24,5 +24,20 @@ namespace ECommerceRazor.Pages.Categories
                 .OrderBy(c => c.DisplayOrder) // Ordenar por orden de visualizacion
                 .ToListAsync();
         }
+
+        public async Task<IActionResult> OnPostDeleteAsync([FromBody] int id)
+        {
+            var category = await _context.Categories.FindAsync(id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            _context.Categories.Remove(category);
+            await _context.SaveChangesAsync();
+
+            return new JsonResult(new { success = true });
+        }
     }
 }
