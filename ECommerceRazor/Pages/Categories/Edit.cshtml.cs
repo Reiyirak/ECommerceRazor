@@ -50,6 +50,8 @@ namespace ECommerceRazor.Pages.Categories
             // Guardar los cambios
             await _context.SaveChangesAsync();
 
+            TempData["Success"] = "Categoria editada con exito";
+
             return RedirectToPage("Index");
         }
     }

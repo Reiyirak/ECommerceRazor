@@ -45,6 +45,9 @@ namespace ECommerceRazor.Pages.Categories
             _context.Categories.Add(Category);
             await _context.SaveChangesAsync();
 
+            // Usar TempData para mostrar el mensaje en la pagina de Index
+            TempData["Success"] = "Categoria creada con exito";
+
             return RedirectToPage("Index");
         }
     }

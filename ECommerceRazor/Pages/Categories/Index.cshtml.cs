@@ -31,11 +31,15 @@ namespace ECommerceRazor.Pages.Categories
 
             if (category == null)
             {
-                return NotFound();
+                TempData["Error"] = "La categoria no fue encontrada";
+                return RedirectToPage("Index");
+                // return NotFound();
             }
 
             _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
+
+            TempData["Success"] = "Categoria eliminada con exito";
 
             return new JsonResult(new { success = true });
         }
