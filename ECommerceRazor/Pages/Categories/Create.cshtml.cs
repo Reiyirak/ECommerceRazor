@@ -25,6 +25,15 @@ namespace ECommerceRazor.Pages.Categories
 
         public async Task<IActionResult> OnPostAsync()
         {
+            // Validacion personalizada: comprobar si el nombre ya existe
+            bool nombreExiste = _context.Categories.Any(c => c.Name == Category.Name);
+
+            if (nombreExiste)
+            {
+                ModelState.AddModelError("Category.Name", "El nombre ya existe. Por favor elige otro.");
+                return Page();
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();
