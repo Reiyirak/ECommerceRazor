@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace ECommerceRazor.Pages.Categories
+namespace ECommerceRazor.Pages.Admin.Categories
 {
     public class IndexModel : PageModel
     {

@@ -1,21 +1,16 @@
-﻿@page "{id:int}"
-@model ECommerceRazor.Pages.Categories.EditModel
+﻿@page
+@model ECommerceRazor.Pages.Admin.Categories.CreateModel
 @{
-    ViewData["Title"] = "Editar Categoria";
+    ViewData["Title"] = "Crear Categoria";
 }
-
-<h2 class="text-center">Editar Categoria</h2>
 
 <div class="container mt-5">
     <div class="card shadow-lg">
         <div class="card-header bg-primary text-white">
-            <h4><i class="fa-solid fa-circle-plus"></i> Editar Categoria</h4>
+            <h4><i class="fa-solid fa-circle-plus"></i> Crear Nueva Categoria</h4>
         </div>
         <div class="card-body">
             <form method="post">
-                @* Hidden field for ID *@
-                <input type="hidden" asp-for="Category.Id">
-
                 @* Validation Summary *@
                 <div asp-validation-summary="All" class="alert alert-danger" id="validation-summary"></div>
 

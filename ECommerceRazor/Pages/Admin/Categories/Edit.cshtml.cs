@@ -3,7 +3,7 @@ using ECommerce.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ECommerceRazor.Pages.Categories
+namespace ECommerceRazor.Pages.Admin.Categories
 {
     public class EditModel : PageModel
     {
