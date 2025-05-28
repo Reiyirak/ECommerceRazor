@@ -1,8 +1,8 @@
 using System;
-using ECommerceRazor.Models;
+using ECommerce.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ECommerceRazor.Data;
+namespace ECommerce.DataAccess.Data;
 
 public class ApplicationDbContext : DbContext
 {
