@@ -44,7 +44,7 @@ namespace ECommerceRazor.Pages.Admin.Categories
             Category.CreationDate = DateTime.Now;
 
             _dbCategory.Add(Category);
-            _dbCategory.Save();
+            // _dbCategory.Save();
 
             // Usar TempData para mostrar el mensaje en la pagina de Index
             TempData["Success"] = "Categoria creada con exito";
