@@ -1,4 +1,5 @@
 using ECommerce.DataAccess.Data;
+using ECommerce.DataAccess.Repository.IRepository;
 using ECommerce.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -8,11 +9,11 @@ namespace ECommerceRazor.Pages.Admin.Categories
 {
     public class CreateModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICategoryRepository _dbCategory;
 
-        public CreateModel(ApplicationDbContext context)
+        public CreateModel(ICategoryRepository dbCategory)
         {
-            _context = context;
+            _dbCategory = dbCategory;
         }
 
         [BindProperty]
@@ -26,13 +27,13 @@ namespace ECommerceRazor.Pages.Admin.Categories
         public async Task<IActionResult> OnPostAsync()
         {
             // Validacion personalizada: comprobar si el nombre ya existe
-            bool nombreExiste = _context.Categories.Any(c => c.Name == Category.Name);
-
-            if (nombreExiste)
-            {
-                ModelState.AddModelError("Category.Name", "El nombre ya existe. Por favor elige otro.");
-                return Page();
-            }
+            // bool nombreExiste = _dbCategory.Categories.Any(c => c.Name == Category.Name);
+            //
+            // if (nombreExiste)
+            // {
+            //     ModelState.AddModelError("Category.Name", "El nombre ya existe. Por favor elige otro.");
+            //     return Page();
+            // }
 
             if (!ModelState.IsValid)
             {
@@ -42,8 +43,8 @@ namespace ECommerceRazor.Pages.Admin.Categories
             // Asignar la fecha de creacion
             Category.CreationDate = DateTime.Now;
 
-            _context.Categories.Add(Category);
-            await _context.SaveChangesAsync();
+            _dbCategory.Add(Category);
+            _dbCategory.Save();
 
             // Usar TempData para mostrar el mensaje en la pagina de Index
             TempData["Success"] = "Categoria creada con exito";
