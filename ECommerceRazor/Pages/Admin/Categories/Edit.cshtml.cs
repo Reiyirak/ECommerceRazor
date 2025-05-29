@@ -1,4 +1,5 @@
 using ECommerce.DataAccess.Data;
+using ECommerce.DataAccess.Repository.IRepository;
 using ECommerce.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -7,11 +8,11 @@ namespace ECommerceRazor.Pages.Admin.Categories
 {
     public class EditModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public EditModel(ApplicationDbContext context)
+        public EditModel(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         [BindProperty]
@@ -19,7 +20,7 @@ namespace ECommerceRazor.Pages.Admin.Categories
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            Category = await _context.Categories.FindAsync(id);
+            Category = _unitOfWork.Category.GetFirstOrDefault(c => c.Id == id);
 
             if (Category == null)
             {
@@ -36,7 +37,7 @@ namespace ECommerceRazor.Pages.Admin.Categories
                 return Page();
             }
 
-            var categoryBd = await _context.Categories.FindAsync(Category.Id);
+            var categoryBd = _unitOfWork.Category.GetFirstOrDefault(c => c.Id == Category.Id);
 
             if (categoryBd == null)
             {
@@ -48,7 +49,7 @@ namespace ECommerceRazor.Pages.Admin.Categories
             categoryBd.DisplayOrder = Category.DisplayOrder;
 
             // Guardar los cambios
-            await _context.SaveChangesAsync();
+            _unitOfWork.Save();
 
             TempData["Success"] = "Categoria editada con exito";
 

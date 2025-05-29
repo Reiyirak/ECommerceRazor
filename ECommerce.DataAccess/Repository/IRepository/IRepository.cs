@@ -11,4 +11,5 @@ public interface IRepository<T> where T : class
     void RemoveRange(IEnumerable<T> entity);
     IEnumerable<T> GetAll();
     T GetFirstOrDefault(Expression<Func<T, bool>>? filter = null);
+    bool NameExists(string name);
 }

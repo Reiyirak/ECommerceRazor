@@ -32,9 +32,14 @@ public class Repository<T> : IRepository<T> where T : class
         IQueryable<T> query = dbSet;
         if (filter != null)
         {
-            query.Where(filter);
+            query = query.Where(filter);
         }
         return query.FirstOrDefault();
+    }
+
+    public bool NameExists(string name)
+    {
+        return _context.Categories.Any(c => c.Name == name);
     }
 
     public void Remove(T entity)

@@ -9,11 +9,11 @@ namespace ECommerceRazor.Pages.Admin.Categories
 {
     public class IndexModel : PageModel
     {
-        private readonly ICategoryRepository _dbCategory;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public IndexModel(ICategoryRepository dbCategory)
+        public IndexModel(IUnitOfWork unitOfWork)
         {
-            _dbCategory = dbCategory;
+            _unitOfWork = unitOfWork;
         }
 
         public IEnumerable<Category> Categories { get; set; } = default!;
@@ -21,22 +21,22 @@ namespace ECommerceRazor.Pages.Admin.Categories
         public void OnGet()
         {
             // Cargar todas las categorias desde la base de datos
-            Categories = _dbCategory.GetAll();
+            Categories = _unitOfWork.Category.GetAll();
         }
 
         public async Task<IActionResult> OnPostDeleteAsync([FromBody] int id)
         {
-            // var category = await _dbCategory.Categories.FindAsync(id);
-            //
-            // if (category == null)
-            // {
-            //     TempData["Error"] = "La categoria no fue encontrada";
-            //     return RedirectToPage("Index");
-            //     // return NotFound();
-            // }
-            //
-            // _dbCategory.Categories.Remove(category);
-            // await _dbCategory.SaveChangesAsync();
+            var category = _unitOfWork.Category.GetFirstOrDefault(c => c.Id == id);
+            
+            if (category == null)
+            {
+                TempData["Error"] = "La categoria no fue encontrada";
+                return RedirectToPage("Index");
+                // return NotFound();
+            }
+            
+            _unitOfWork.Category.Remove(category);
+            _unitOfWork.Save();
 
             TempData["Success"] = "Categoria eliminada con exito";
 

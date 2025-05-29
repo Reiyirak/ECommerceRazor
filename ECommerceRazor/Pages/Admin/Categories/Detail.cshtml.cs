@@ -1,4 +1,5 @@
 using ECommerce.DataAccess.Data;
+using ECommerce.DataAccess.Repository.IRepository;
 using ECommerce.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -7,18 +8,18 @@ namespace ECommerceRazor.Pages.Admin.Categories
 {
     public class DetailModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DetailModel(ApplicationDbContext context)
+        public DetailModel(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         public Category Category { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            Category = await _context.Categories.FindAsync(id);
+            Category = _unitOfWork.Category.GetFirstOrDefault(c => c.Id == id);
 
             if (Category == null)
             {
